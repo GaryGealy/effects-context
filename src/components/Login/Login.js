@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useInsertionEffect } from "react";
 
 import Card from "../UI/Card/Card";
 import classes from "./Login.module.css";
@@ -11,16 +11,25 @@ const Login = (props) => {
   const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
 
+  useEffect( () => {
+
+  });  
+
   useEffect(() => {
-    const indentifier = setTimeout(() => {
-      console.log('Validity check');
+    // this will get called on every keystroke in enteredEmail and 
+    // enteredPassword.  
+    
+    // creates a timer each keystroke
+    const indentifier = setTimeout(() => { 
       setFormIsValid(
           enteredEmail.includes("@") && enteredPassword.trim().length > 6
         );
     }, 500);
 
+    // clean up for useEffect() in this case, we clear timer before
+    // it fires, so that it will actually only go off when the user
+    // pauses typing.
     return () => {
-      console.log("CleanUp");
       clearTimeout(indentifier);
     };
   }, [enteredEmail, enteredPassword]);
