@@ -39,6 +39,11 @@ const Login = (props) => {
     isValid: false,
   });
 
+  // use these in useEffect, instate is emailState.isValid so 
+  // that useEffect will only happen when validity changes, not everytime
+  // char is enterd, for example password len = 6 will set valid to true, 
+  // this useEffect would then be triggered but it will also be triggered when
+  // 7th char is entered, and its already valid but it would fire userEffect.  
   const { isValid: emailIsValid } = emailState;
   const { isValid: passwordIsValid } = passwordState;
 
